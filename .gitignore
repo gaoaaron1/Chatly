@@ -2,6 +2,7 @@
 
 # dependencies
 /backend/node_modules
+/backend/privateFile.txt
 /.pnp
 .pnp.js
 
