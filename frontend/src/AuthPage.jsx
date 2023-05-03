@@ -2,9 +2,11 @@ import axios from 'axios'
 
 
 const AuthPage = (props) => {
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
       e.preventDefault();
       const { value } = e.target[0];
+
+      /*
       //Makes a call to our backend node
       axios.post(
         'http://localhost:3001/authenticate',
@@ -12,7 +14,19 @@ const AuthPage = (props) => {
       )
       .then(r => props.onAuth({ ...r.data, secret: value }))
       .catch(e => console.log('error', e))  
-    };
+    };*/
+
+
+    try {
+      // Send a POST request to your Node.js server to insert the user into MongoDB
+      const response = await axios.post('http://localhost:3001/authenticate', { username: value });
+      
+      // Pass the user object returned from the server to the onAuth callback
+      props.onAuth({ ...response.data, secret: value });
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
   
     return (
       <div className="background">
